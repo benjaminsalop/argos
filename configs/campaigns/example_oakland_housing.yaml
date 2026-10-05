@@ -1,0 +1,41 @@
+campaign_id: oakland_housing_policy
+version: 1
+description: Local campaign assessing public reaction to a proposed housing and encampment policy.
+
+# Geographies of interest (tracts, ZIPs, or named neighborhoods resolved via the crosswalk)
+geographies:
+  - type: zip
+    ids: ["94618", "94611"]
+  - type: neighborhood
+    ids: ["Rockridge", "Temescal"]
+
+# Aspects the LLM should look for. `weight` scales the final score (default 1.0).
+# Aliases are injected into the prompt and used by the keyword matcher.
+aspects:
+  housing_affordability:
+    weight: 2.0
+    terms: [affordability, affordable housing, rent, rent control, cost of living]
+  homelessness:
+    weight: 2.5
+    terms: [homelessness, unhoused, houseless, shelter]
+  encampments:
+    weight: 2.5
+    terms: [encampment, encampments, sweeps]
+  gentrification:
+    weight: 1.5
+    terms: [gentrification, displacement]
+  public_safety:
+    weight: 1.0
+    terms: [crime, safety]
+
+# Optional per-term overrides inside an aspect
+term_overrides:
+  unhoused: 3.0
+
+sources:
+  include: [oaklandside, local_x_search]
+
+scoring:
+  model: "<provider-model-id>"
+  prompt_version: aspect_sentiment_v1
+  min_relevance: 0.2

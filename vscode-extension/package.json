@@ -1,0 +1,20 @@
+{
+  "name": "argos-vscode",
+  "displayName": "argos",
+  "description": "Edit campaign configs, run pipelines and view results (architecture stub)",
+  "version": "0.0.1",
+  "engines": { "vscode": "^1.90.0" },
+  "categories": ["Data Science", "Other"],
+  "main": "./dist/extension.js",
+  "activationEvents": ["workspaceContains:configs/campaigns/*.yaml"],
+  "contributes": {
+    "yamlValidation": [
+      { "fileMatch": "configs/campaigns/*.yaml", "url": "./schemas/campaign.schema.json" }
+    ],
+    "commands": [
+      { "command": "argos.runEnrich", "title": "argos: Run enrichment for campaign" },
+      { "command": "argos.openWeights", "title": "argos: Open weights editor" },
+      { "command": "argos.showResults", "title": "argos: Show results" }
+    ]
+  }
+}

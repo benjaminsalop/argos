@@ -1,0 +1,24 @@
+# Source registry. Each entry maps to a connector class in argos.ingest.
+sources:
+  oaklandside:
+    type: news
+    connector: argos.ingest.news.RssNewsConnector
+    feed_url: "<rss-feed-url>"
+    schedule: hourly
+  local_x_search:
+    type: social
+    connector: argos.ingest.social.SocialSearchConnector
+    query_from_campaign: true      # build queries from campaign aspect terms
+    notes: "Check platform terms before enabling."
+  oakland_pd_reports:
+    type: crime_report
+    connector: argos.ingest.crime_reports.OpenDataConnector
+    dataset_id: "<open-data-portal-dataset-id>"
+  prediction_markets:
+    type: market
+    connector: argos.ingest.prediction_markets.MarketPriceConnector
+    markets: ["<market-id>"]
+  voter_file:
+    type: voter_file
+    connector: argos.ingest.voter_file.VoterFileLoader
+    path: "data/raw/voter_file/"   # stays local; only aggregates leave enrich/demographics

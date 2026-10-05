@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "argos campaign config",
+  "type": "object",
+  "required": ["campaign_id", "version", "aspects"],
+  "properties": {
+    "campaign_id": { "type": "string" },
+    "version": { "type": "integer", "minimum": 1 },
+    "description": { "type": "string" },
+    "geographies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "ids"],
+        "properties": {
+          "type": { "enum": ["tract", "zip", "neighborhood"] },
+          "ids": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "aspects": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["terms"],
+        "properties": {
+          "weight": { "type": "number", "minimum": 0, "default": 1.0 },
+          "terms": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+        }
+      }
+    },
+    "term_overrides": { "type": "object", "additionalProperties": { "type": "number", "minimum": 0 } },
+    "sources": {
+      "type": "object",
+      "properties": { "include": { "type": "array", "items": { "type": "string" } } }
+    },
+    "scoring": {
+      "type": "object",
+      "properties": {
+        "model": { "type": "string" },
+        "prompt_version": { "type": "string" },
+        "min_relevance": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    }
+  }
+}

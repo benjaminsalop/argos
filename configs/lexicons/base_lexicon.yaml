@@ -1,0 +1,14 @@
+# Base lexicon: general-purpose word/phrase values used as a fallback and as a sanity check
+# against LLM scores. Campaign weights (configs/campaigns/) sit on top of this.
+# Every entry carries provenance. Values are placeholders.
+version: 1
+terms:
+  corrupt:
+    valence: -0.8
+    provenance: "<published lexicon or team-labeled sample>"
+  crime:
+    valence: -0.5
+    provenance: "<...>"
+  affordable:
+    valence: 0.3
+    provenance: "<...>"
